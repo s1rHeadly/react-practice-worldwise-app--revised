@@ -4,7 +4,7 @@ import styles from './CountriesList.module.css';
 
 const CountriesList = () => {
   return (
-    <div>Countries Component</div>
+    <ul className={styles.countryList}></ul>
   )
 }
 

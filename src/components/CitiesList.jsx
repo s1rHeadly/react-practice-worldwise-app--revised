@@ -3,7 +3,7 @@ import styles from './CitiesList.module.css'
 
 const CitiesList = () => {
   return (
-    <div>CitiesList Component</div>
+    <ul className={styles.cityList}></ul>
   )
 }
 

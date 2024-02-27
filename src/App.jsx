@@ -13,6 +13,7 @@ import PageNotFound from './pages/PageNotFound'
 
 
 import { BASE_URL } from '../utils/helpers';
+import City from './components/City';
 
 function App() {
   
@@ -51,6 +52,7 @@ function App() {
             {/* Nested app Routes */}
             <Route index element={<Navigate replace to="cities"/>} /> 
             <Route path="cities" element={<CitiesList cities={cities} loading={loading}/>}/>
+            <Route path="cities/:id" element={<City />}/>
             <Route path="countries" element={<CountriesLlist cities={cities} loading={loading}/>}/>
             <Route path="form" element={<Form />}/>
             

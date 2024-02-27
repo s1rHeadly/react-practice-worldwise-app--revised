@@ -1,4 +1,6 @@
 import {Routes, Route, Navigate} from 'react-router-dom';
+import { useState, useEffect} from 'react';
+
 import AppLayout from './components/AppLayout';
 import Homepage from './pages/Homepage';
 import Product from './pages/Product'
@@ -13,8 +15,32 @@ import PageNotFound from './pages/PageNotFound'
 import { BASE_URL } from '../utils/helpers';
 
 function App() {
+  
+  const [cities, setCities] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  console.log(BASE_URL)
+
+  useEffect(() => {
+
+      const getCitiesData = async(url) => {
+         setLoading(true)
+          try {
+            const response = await fetch(url)
+            if(response.status === 200){
+              const data  = await response.json();
+              setCities(data);
+            }
+          }catch (error) {
+            setLoading(true)
+            setError(error)
+          }finally{
+            setLoading(false)
+          }
+        
+      }
+   getCitiesData(`${BASE_URL}/cities`)
+  }, [])
 
   return (
     <>
@@ -24,8 +50,8 @@ function App() {
       <Route path="/app" element={<AppLayout />}>
             {/* Nested app Routes */}
             <Route index element={<Navigate replace to="cities"/>} /> 
-            <Route path="cities" element={<CitiesList/>}/>
-            <Route path="countries" element={<CountriesLlist/>}/>
+            <Route path="cities" element={<CitiesList cities={cities} loading={loading}/>}/>
+            <Route path="countries" element={<CountriesLlist cities={cities} loading={loading}/>}/>
             <Route path="form" element={<Form />}/>
             
       </Route>

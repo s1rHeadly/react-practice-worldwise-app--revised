@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 
 const CityItem = ({city}) => {
   
-  const {cityName, country, date, emoji, id, position} = city;
+  const {cityName, date, emoji, id, position} = city;
   const formatttedDate = formatDate(date);
+
 
 
   return (

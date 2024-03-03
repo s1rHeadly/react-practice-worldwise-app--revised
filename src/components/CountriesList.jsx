@@ -4,17 +4,20 @@ import styles from './CountriesList.module.css';
 import Spinner from './Spinner';
 import Message from './Message';
 import CountryItem from './CountryItem';
+import { useContext } from 'react';
+import { CitiesContext } from '../context/CitiesContext';
 
-const CountriesList = ({cities, loading}) => {
+const CountriesList = () => {
 
 
+  const {cities, loading} = useContext(CitiesContext)
 
   if(loading){
     return <Spinner />
  }
 
  if(!cities.length){ // if cities are non existant
-   return <Message message="NO countries added"/>
+   return <Message message="No countries added"/>
  }
 
 

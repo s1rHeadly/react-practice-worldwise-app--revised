@@ -2,8 +2,12 @@ import styles from './CitiesList.module.css';
 import CityItem from './CityItem';
 import Message from './Message';
 import Spinner from './Spinner'
+import { CitiesContext } from '../context/CitiesContext';
+import { useContext } from 'react';
 
-const CitiesList = ({cities, loading}) => {
+const CitiesList = () => {
+
+  const {cities, loading} = useContext(CitiesContext)
 
 
   if(loading){

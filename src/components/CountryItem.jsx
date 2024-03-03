@@ -1,14 +1,14 @@
 
 
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styles from './CountryItem.module.css';
 
 const CountryItem = ({country}) => {
   const {name, emoji} = country
 
-  const x = useSearchParams();
+  const {id} = useParams()
+  console.log(id)
 
-  console.log(x)
   return (
     <li className={styles.countryItem}>
       <span>{emoji}</span>

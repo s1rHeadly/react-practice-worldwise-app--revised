@@ -8,13 +8,13 @@ import styles from './City.module.css'
 const City = () => {
 
 
-  // // TEMP DATA
-  // const currentCity = {
-  //   cityName: "Lisbon",
-  //   emoji: "🇵🇹",
-  //   date: "2027-10-31T15:59:59.138Z",
-  //   notes: "My favorite city so far!",
-  // };
+  // TEMP DATA
+  const currentCity = {
+    cityName: "Lisbon",
+    emoji: "🇵🇹",
+    date: "2027-10-31T15:59:59.138Z",
+    notes: "My favorite city so far!",
+  };
 
   const { cityName, emoji, date, notes } = currentCity;
 

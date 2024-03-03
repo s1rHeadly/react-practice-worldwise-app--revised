@@ -1,6 +1,7 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Form.module.css";
 import Button from "./global/Button";
@@ -20,6 +21,14 @@ const Form = () => {
   const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
+
+
+  const navigate = useNavigate();
+
+  function goBack(e){
+    e.preventDefault()
+    navigate(-1) // go back to the previous page that we were on regardless of the page
+  }
 
   return (
     <form className={styles.form}>
@@ -53,7 +62,7 @@ const Form = () => {
 
       <div className={styles.buttons}>
        <Button selected="primary">Add</Button>
-       <Button selected="back">Back</Button>
+       <Button selected="back" onClick={goBack}>Back</Button>
       </div>
     </form>
   );

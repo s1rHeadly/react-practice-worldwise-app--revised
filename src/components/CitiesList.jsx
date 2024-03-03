@@ -7,6 +7,7 @@ import { useContext } from 'react';
 
 const CitiesList = () => {
 
+  // use Context Cities 
   const {cities, loading} = useContext(CitiesContext)
 
 

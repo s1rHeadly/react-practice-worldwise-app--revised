@@ -1,35 +1,34 @@
 
-import { useParams, useSearchParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { formatDate } from "../../utils/helpers";
 import styles from './City.module.css'
+import { CitiesContext } from "../context/CitiesContext";
+import { useContext } from "react";
+import { useEffect } from "react";
 
 
 
 const City = () => {
 
 
-  // TEMP DATA
-  const currentCity = {
-    cityName: "Lisbon",
-    emoji: "🇵🇹",
-    date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
-  };
+  // // TEMP DATA
+  // const currentCity = {
+  //   cityName: "Lisbon",
+  //   emoji: "🇵🇹",
+  //   date: "2027-10-31T15:59:59.138Z",
+  //   notes: "My favorite city so far!",
+  // };
+
+  const {id} = useParams(); // get the id of url inside the template when a city Item is clicked
+  const {getCity, currentCity} = useContext(CitiesContext) // get the getCity function from the context
+  
+  useEffect(() => {
+      getCity(id)
+  }, [id]);
 
   const { cityName, emoji, date, notes } = currentCity;
 
  
-  const {id} = useParams(); // get the id of url inside the template when a city Item is clicked
-  // console.log(id)
-
-  // use Search Params state
-  const [searchParams, setSearch] = useSearchParams();
-  const latQuery = searchParams.get('lat');
-  const longQuery = searchParams.get('lng');
-  // console.log('lat', latQuery)
-  // console.log('lng', longQuery)
-
-
 
   return (
     <div className={styles.city}>

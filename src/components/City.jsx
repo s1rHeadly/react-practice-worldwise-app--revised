@@ -5,6 +5,7 @@ import styles from './City.module.css'
 import { CitiesContext } from "../context/CitiesContext";
 import { useContext } from "react";
 import { useEffect } from "react";
+import Spinner from "./Spinner";
 
 
 
@@ -20,7 +21,7 @@ const City = () => {
   // };
 
   const {id} = useParams(); // get the id of url inside the template when a city Item is clicked
-  const {getCity, currentCity} = useContext(CitiesContext) // get the getCity function from the context
+  const {getCity, currentCity, loading} = useContext(CitiesContext) // get the getCity function from the context
   
   useEffect(() => {
       getCity(id)
@@ -28,9 +29,11 @@ const City = () => {
 
   const { cityName, emoji, date, notes } = currentCity;
 
- 
+  if(loading) {
+    return <Spinner />
+  }
 
-  return (
+return (
     <div className={styles.city}>
       <div className={styles.row}>
         <h3>

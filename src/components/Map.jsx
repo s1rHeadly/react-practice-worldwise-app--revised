@@ -1,6 +1,19 @@
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet'
 import styles from './Map.module.css';
+import { CitiesContext } from '../context/CitiesContext';
+// fix missing icon on the map
+import iconMarker from 'leaflet/dist/images/marker-icon.png'
+import iconRetina from 'leaflet/dist/images/marker-icon-2x.png'
+import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 
+// pass this to the Marker component
+const icon = L.icon({ 
+  iconRetinaUrl:iconRetina, 
+  iconUrl: iconMarker, 
+  shadowUrl: iconShadow 
+});
 
 
 
@@ -27,6 +40,8 @@ const Map = () => {
   // }
 
 
+  const {cities} = useContext(CitiesContext)
+
   // use Navigate
   const navigate = useNavigate();
 
@@ -36,12 +51,26 @@ const Map = () => {
   }
 
 
+  const [mapPosition, setMapPosition] = useState([40, 0]);
+
   return (
     <div className={styles.mapContainer} onClick={navigateToForm}>
-    <h1>Map</h1>
-    <span>Latitude: {latQuery}</span>
-    <span>Longitude: {longQuery}</span>
-    <span>ID: {id}</span>
+    <MapContainer center={mapPosition} zoom={5} scrollWheelZoom={true} className={styles.map}>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+      />
+
+      {cities?.map((city) => (
+        <Marker position={[city.position.lat, city.position.lng]} icon={icon} key={city.id}>
+        <Popup>
+          <span>{city.emoji}</span>
+          <span>{city.cityName}</span>
+        </Popup>
+      </Marker>
+      ))}
+  
+</MapContainer>
 
     {/* <button onClick={changeSearchParams}>Update Query</button> */}
     </div>

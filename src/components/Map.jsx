@@ -28,8 +28,8 @@ const Map = () => {
   const latQuery = searchParams.get('lat');
   const longQuery = searchParams.get('lng');
 
-  // console.log('lat', latQuery)
-  // console.log('lng', longQuery)
+  console.log('lat', latQuery)
+  console.log('lng', longQuery)
 
   // function changeSearchParams(){
   //   setSearch((prevState) => ({
